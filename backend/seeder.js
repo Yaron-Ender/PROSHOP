@@ -13,7 +13,6 @@ dotenv.config()
 
 const importData = async()=>{
 try{
-await Order.deleteMany()
 await User.deleteMany()
 await Product.deleteMany()
 

@@ -1,8 +1,23 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Outlet } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Header from "./component/header";
 import Footer from "./component/Fotter";
+import { logout } from './slices/authSlice';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const expirationTime = localStorage.getItem('expirationTime');
+    if (expirationTime) {
+      const currentTime = new Date().getTime();
+      if (currentTime > expirationTime) {
+        dispatch(logout());
+      }
+    }
+  }, [dispatch]);
   return (
     <>
       <Header />
@@ -12,6 +27,7 @@ const App = () => {
       </Container>
       </main>
       <Footer />
+      <ToastContainer />
     </>
   );
 }

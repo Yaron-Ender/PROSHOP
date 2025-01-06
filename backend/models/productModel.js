@@ -8,6 +8,7 @@ const reviewSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      //the ref:User is unnessecery to mt opinion - i checked it without it and it is gives the same result
       ref: "User",
     },
   },
